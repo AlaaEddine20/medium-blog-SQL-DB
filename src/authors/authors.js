@@ -5,13 +5,13 @@ const router = express.Router();
 
 const Model = require("../utils/model/index");
 
-const categories = new Model("categories");
+const authors = new Model("authors");
 
 // POST
 router.post("/", async (req, res, next) => {
   try {
-    const { category_name } = req.body;
-    const query = `INSERT INTO categories (category_name) VALUES ('${category_name}')`;
+    const { name, img } = req.body;
+    const query = `INSERT INTO authors (name, img) VALUES ('${name}', '${img}')`;
     const result = await db.query(query);
     res.send(result);
   } catch (error) {
@@ -23,7 +23,7 @@ router.post("/", async (req, res, next) => {
 // GET ALL
 router.get("/", async (req, res, next) => {
   try {
-    const response = await categories.findOne();
+    const response = await authors.findOne();
     res.send(response);
   } catch (error) {
     console.log(error);
@@ -34,7 +34,7 @@ router.get("/", async (req, res, next) => {
 // GET ONE
 router.get("/:id", async (req, res, next) => {
   try {
-    const { rows } = await categories.findById(req.params.id);
+    const { rows } = await authors.findById(req.params.id);
     res.send(rows);
   } catch (error) {
     console.log(error);
@@ -48,7 +48,7 @@ router.put("/:id", async (req, res, next) => {
     const body = Object.entries(req.body);
     const id = req.params.id;
 
-    const query = `UPDATE categories SET ${body
+    const query = `UPDATE authors SET ${body
       .map(([prop, value]) => `${prop}='${value}'`)
       .join(", ")} WHERE id=${parseInt(id)}`;
     const result = await db.query(query);
@@ -63,7 +63,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const query = `DELETE FROM categories WHERE id=${parseInt(id)}`;
+    const query = `DELETE FROM authors WHERE id=${parseInt(id)}`;
     const result = await db.query(query);
     res.send(result);
     res.send("ID doesn't exist");

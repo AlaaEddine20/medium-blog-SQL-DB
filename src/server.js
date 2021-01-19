@@ -6,7 +6,7 @@ const server = express();
 // ROUTER
 const articlesRouter = require("./articles/articles");
 const categoriesRouter = require("./categories/categories");
-
+const authorsRouter = require("./authors/authors");
 // USE CORS
 server.use(cors());
 
@@ -19,6 +19,7 @@ server.use(express.json());
 // ROUTES
 server.use("/articles", articlesRouter);
 server.use("/categories", categoriesRouter);
+server.use("/authors", authorsRouter);
 
 // RUNNING SERVER
 server.listen(port, () => {
