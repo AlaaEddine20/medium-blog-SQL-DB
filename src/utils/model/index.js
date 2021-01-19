@@ -13,7 +13,7 @@ class Model {
     }
   }
 
-  // Find article by id
+  // Find by id
   async findById(id) {
     if (!id) {
       throw new Error("No id provided");
@@ -40,7 +40,7 @@ class Model {
     }
   }
 
-  // Delete articles
+  // Delete
   async findByIdAndDelete(id, fields) {
     if (!id) {
       throw new Error("No id provided");
