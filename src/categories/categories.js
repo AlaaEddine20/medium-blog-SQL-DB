@@ -66,7 +66,6 @@ router.delete("/:id", async (req, res, next) => {
     const query = `DELETE FROM categories WHERE id=${parseInt(id)}`;
     const result = await db.query(query);
     res.send(result);
-    res.send("ID doesn't exist");
   } catch (error) {
     console.log(error);
     next(error);
